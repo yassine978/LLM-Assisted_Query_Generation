@@ -21,6 +21,7 @@ class Settings(BaseSettings):
     groq_api_key: str = Field(..., description="Groq API key for LLM calls")
 
     # MongoDB Configuration
+    mongodb_uri: Optional[str] = Field(default=None, description="MongoDB connection URI (takes precedence over individual settings)")
     mongodb_host: str = Field(default="localhost", description="MongoDB host")
     mongodb_port: int = Field(default=27017, description="MongoDB port")
     mongodb_username: str = Field(default="admin", description="MongoDB username")
@@ -34,15 +35,17 @@ class Settings(BaseSettings):
     neo4j_password: str = Field(default="password123", description="Neo4j password")
 
     # Redis Configuration
+    redis_uri: Optional[str] = Field(default=None, description="Redis connection URI")
     redis_host: str = Field(default="localhost", description="Redis host")
     redis_port: int = Field(default=6379, description="Redis port")
-    redis_password: Optional[str] = Field(default=None, description="Redis password")
+    redis_password: Optional[str] = Field(default="redispass123", description="Redis password")
     redis_db: int = Field(default=0, description="Redis database number")
 
     # HBase Configuration
+    hbase_uri: Optional[str] = Field(default=None, description="HBase Thrift connection URI")
     hbase_host: str = Field(default="localhost", description="HBase host")
     hbase_port: int = Field(default=9090, description="HBase Thrift port")
-    hbase_thrift_protocol: str = Field(default="compact", description="HBase Thrift protocol")
+    hbase_thrift_protocol: str = Field(default="binary", description="HBase Thrift protocol (compact or binary)")
 
     # RDF/Fuseki Configuration
     fuseki_endpoint: str = Field(
@@ -62,14 +65,42 @@ class Settings(BaseSettings):
     mcp_server_timeout: int = Field(default=60, description="MCP server timeout in seconds")
     mcp_max_retries: int = Field(default=3, description="Maximum MCP retry attempts")
 
-    @property
-    def mongodb_uri(self) -> str:
-        """Construct MongoDB connection URI."""
+    def get_mongodb_uri(self) -> str:
+        """Get or construct MongoDB connection URI."""
+        if self.mongodb_uri:
+            return self.mongodb_uri
+
+        # Construct URI from components
         return (
             f"mongodb://{self.mongodb_username}:{self.mongodb_password}"
             f"@{self.mongodb_host}:{self.mongodb_port}/"
             f"?authSource={self.mongodb_auth_source}"
         )
+
+    def get_redis_uri(self) -> str:
+        """Get or construct Redis connection URI."""
+        if self.redis_uri:
+            return self.redis_uri
+
+        # Construct URI from components
+        if self.redis_password:
+            return f"redis://:{self.redis_password}@{self.redis_host}:{self.redis_port}/{self.redis_db}"
+        else:
+            return f"redis://{self.redis_host}:{self.redis_port}/{self.redis_db}"
+
+    def get_hbase_uri(self) -> str:
+        """Get or construct HBase Thrift connection URI."""
+        if self.hbase_uri:
+            return self.hbase_uri
+
+        # Construct URI from components
+        # Format: hbase+thrift://host:port?protocol=compact
+        return f"hbase+thrift://{self.hbase_host}:{self.hbase_port}?protocol={self.hbase_thrift_protocol}"
+
+    def get_sparql_endpoint(self) -> str:
+        """Get full SPARQL endpoint URL."""
+        # Format: http://localhost:3030/{dataset}/sparql
+        return f"{self.fuseki_endpoint}/{self.fuseki_dataset}/sparql"
 
 
 @lru_cache()

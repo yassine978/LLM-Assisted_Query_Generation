@@ -10,6 +10,7 @@ redis
 happybase
 rdflib
 SPARQLWrapper
+pymongo[srv]
 
 # Async and HTTP
 aiohttp
@@ -44,3 +45,13 @@ colorlog
 requests
 python-dateutil
 pytz
+aiofiles
+
+# Core Web Framework
+streamlit
+
+# Async Support
+asyncio-compat
+
+# Data Visualization
+plotly

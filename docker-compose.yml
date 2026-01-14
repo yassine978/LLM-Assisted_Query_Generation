@@ -40,33 +40,32 @@ services:
     profiles:
       - phase4  # Only start with: docker-compose --profile phase4 up
 
-  # Redis Key-Value Store (for Phase 6)
+  # Redis Key-Value Store (for Phase 7)
   redis:
     image: redis:7.2-alpine
     container_name: llm-nosql-redis
     restart: unless-stopped
     ports:
       - "6379:6379"
-    command: redis-server --appendonly yes
+    command: redis-server --appendonly yes --requirepass redispass123
     volumes:
       - redis_data:/data
     networks:
       - nosql_network
-    profiles:
-      - phase6
 
-  # HBase (for Phase 6) - Using standalone mode
+  # HBase (for Phase 7) - Using standalone mode
   hbase:
-    image: harisekhon/hbase:2.5
+    image: dajobe/hbase:latest
     container_name: llm-nosql-hbase
     restart: unless-stopped
     ports:
       - "16010:16010"  # HBase Master Web UI
       - "9090:9090"    # Thrift API
-      - "9095:9095"    # Thrift API (alternative)
+      - "9095:9095"    # Thrift2 API
       - "2181:2181"    # Zookeeper
     environment:
-      HBASE_MANAGES_ZK: "true"
+      HBASE_CONF_hbase_rootdir: /hbase-data
+      HBASE_CONF_hbase_zookeeper_quorum: localhost
     volumes:
       - hbase_data:/hbase-data
     networks:
@@ -76,7 +75,7 @@ services:
 
   # Apache Jena Fuseki (RDF Triple Store) (for Phase 6)
   fuseki:
-    image: stain/jena-fuseki:4.9.0
+    image: stain/jena-fuseki:latest
     container_name: llm-nosql-fuseki
     restart: unless-stopped
     ports:

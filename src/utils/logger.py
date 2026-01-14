@@ -41,7 +41,8 @@ def setup_logging(log_level: Optional[str] = None) -> None:
     )
 
     # Configure root logger
-    handler = colorlog.StreamHandler(sys.stdout)
+    # Use stderr to avoid interfering with MCP protocol on stdout
+    handler = colorlog.StreamHandler(sys.stderr)
     handler.setFormatter(formatter)
 
     root_logger = logging.getLogger()
@@ -50,6 +51,7 @@ def setup_logging(log_level: Optional[str] = None) -> None:
     root_logger.setLevel(log_level_int)
 
     # Configure structlog
+    # Use stderr for all logging to avoid interfering with MCP protocol
     structlog.configure(
         processors=[
             structlog.contextvars.merge_contextvars,
@@ -61,7 +63,7 @@ def setup_logging(log_level: Optional[str] = None) -> None:
         ],
         wrapper_class=structlog.make_filtering_bound_logger(log_level_int),
         context_class=dict,
-        logger_factory=structlog.PrintLoggerFactory(),
+        logger_factory=structlog.PrintLoggerFactory(file=sys.stderr),
         cache_logger_on_first_use=True,
     )
 

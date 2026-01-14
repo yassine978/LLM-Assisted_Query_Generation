@@ -1,0 +1,231 @@
+=============================================================================
+NATURAL LANGUAGE TEST QUERIES FOR LLM-ASSISTED NOSQL QUERY GENERATION
+=============================================================================
+
+Project: LLM-Assisted NoSQL Query Generation System
+Purpose: Natural Language to Database Query Translation
+Database Systems: MongoDB, Neo4j, Redis, HBase, RDF/SPARQL
+
+This document contains comprehensive test queries for evaluating the system's
+ability to translate natural language into database-specific query languages
+across five different NoSQL database paradigms.
+
+=============================================================================
+
+
+=============================================================================
+1. MONGODB ATLAS (DOCUMENT STORE)
+=============================================================================
+
+Database: sample_mflix
+Collection: movies
+Schema: title, year, genres[], imdb{rating, votes}, cast[], directors[], plot
+
+-----------------------------------------------------------------------------
+1.1 Simple Queries
+-----------------------------------------------------------------------------
+
+1. Find all movies from 2015
+2. Show me action movies
+3. Find movies directed by Christopher Nolan
+4. Show movies released between 2010 and 2015
+
+-----------------------------------------------------------------------------
+1.2 Intermediate Queries
+-----------------------------------------------------------------------------
+
+5. Count movies by year for years 2010-2015
+6. Show movies with Tom Hanks in the cast
+
+-----------------------------------------------------------------------------
+1.3 Advanced Queries (Aggregation Pipeline)
+-----------------------------------------------------------------------------
+
+7.  Count how many movies per genre
+8.  Find the average IMDb rating by year
+9.  Show the top 5 most common directors
+10. Find actors who appeared in more than 3 movies
+
+
+=============================================================================
+2. NEO4J (GRAPH DATABASE)
+=============================================================================
+
+Dataset: Social Network Graph
+Nodes: Person, Company, Technology
+Relationships: FRIENDS_WITH, WORKS_AT, KNOWS_SKILL
+Properties: name, email, age, city, country, role, level
+
+-----------------------------------------------------------------------------
+2.1 Simple Node Queries
+-----------------------------------------------------------------------------
+
+11. Find all people in New York
+12. Show all companies in the Technology industry
+13. Find people older than 30
+
+-----------------------------------------------------------------------------
+2.2 Relationship Queries
+-----------------------------------------------------------------------------
+
+14. Find friends of Alice Johnson
+15. Show who works at TechCorp
+16. Show technologies known by Bob Smith
+
+-----------------------------------------------------------------------------
+2.3 Graph Pattern Queries
+-----------------------------------------------------------------------------
+
+17. Show people who work at the same company as their friends
+18. Get the shortest path between Alice Johnson and Frank Wilson
+
+-----------------------------------------------------------------------------
+2.4 Advanced Analytical Queries
+-----------------------------------------------------------------------------
+
+19. Count how many friends each person has
+20. Find the most popular programming languages (most people know them)
+
+
+=============================================================================
+3. REDIS (KEY-VALUE STORE)
+=============================================================================
+
+Dataset: User Cache
+Key Patterns: user:*, product:*, session:*, config:*, leaderboard:*
+
+-----------------------------------------------------------------------------
+3.1 Pattern Matching Queries
+-----------------------------------------------------------------------------
+
+21. Show me all users
+22. Give me the keys that are in the gaming leaderboard
+23. Find session keys
+
+-----------------------------------------------------------------------------
+3.2 Specific Key Retrieval
+-----------------------------------------------------------------------------
+
+24. Get user 1001
+25. Show me product 102
+26. Get session for user 1001
+
+-----------------------------------------------------------------------------
+3.3 Database Information Queries
+-----------------------------------------------------------------------------
+
+27. What's in the database?
+28. Show me the database structure
+
+-----------------------------------------------------------------------------
+3.4 Write Operations
+-----------------------------------------------------------------------------
+
+29. Create a key called test with value hello
+30. Set mykey to world with 60 second expiration
+
+
+=============================================================================
+4. HBASE (WIDE-COLUMN STORE)
+=============================================================================
+
+Table: users
+Column Families: profile, contact, preferences
+Row Keys: user_1001, user_1002, user_1003, user_1004
+
+Sample Data:
+- user_1001: Alice Johnson (New York, age 28, dark theme, alice@example.com)
+- user_1002: Bob Smith (San Francisco, age 35, light theme, bob@example.com)
+- user_1003: Charlie Davis (Austin, age 42, dark theme, charlie@example.com)
+- user_1004: Diana Lee (email: diana@example.com)
+
+-----------------------------------------------------------------------------
+4.1 Basic Row Retrieval
+-----------------------------------------------------------------------------
+
+31. Get user 1001
+32. Show all users
+
+-----------------------------------------------------------------------------
+4.2 Contact Information Queries
+-----------------------------------------------------------------------------
+
+33. Show contact information for Bob Smith
+34. Get all emails from the users table
+
+-----------------------------------------------------------------------------
+4.3 Profile Queries
+-----------------------------------------------------------------------------
+
+35. Show users from New York
+36. Find all users from Austin
+
+-----------------------------------------------------------------------------
+4.4 Preference Queries
+-----------------------------------------------------------------------------
+
+37. Find users with dark theme
+38. Show users who prefer light theme
+
+-----------------------------------------------------------------------------
+4.5 Complex Queries
+-----------------------------------------------------------------------------
+
+39. Find users in New York who prefer dark theme
+40. Show users over 30 with light theme
+
+
+=============================================================================
+5. RDF/SPARQL (TRIPLE STORE)
+=============================================================================
+
+Dataset: Wikidata Scientists
+Entities: Physicists, Mathematicians, Universities
+Properties: occupation, birth_date, death_date, country, employer
+
+-----------------------------------------------------------------------------
+5.1 Basic Entity Queries
+-----------------------------------------------------------------------------
+
+41. Find all physicists
+42. Get information about Albert Einstein
+43. Show all people
+44. List all universities
+
+-----------------------------------------------------------------------------
+5.2 Specific Person Queries
+-----------------------------------------------------------------------------
+
+45. Get details about Stephen Hawking
+46. Find Alan Turing
+
+-----------------------------------------------------------------------------
+5.3 Property Queries
+-----------------------------------------------------------------------------
+
+47. Show birth dates of all people
+48. Show occupations of all people
+
+-----------------------------------------------------------------------------
+5.4 Counting and Aggregation Queries
+-----------------------------------------------------------------------------
+
+49. Count all physicists
+50. Count people by country
+
+
+=============================================================================
+END OF TEST QUERIES
+=============================================================================
+
+Total Test Queries: 50 (10 per database)
+- MongoDB: 10 queries (4 simple, 2 intermediate, 4 advanced)
+- Neo4j: 10 queries (3 simple, 3 relationship, 2 pattern, 2 analytical)
+- Redis: 10 queries (3 pattern, 3 retrieval, 2 info, 2 write)
+- HBase: 10 queries (2 basic, 2 contact, 2 profile, 2 preference, 2 complex)
+- RDF/SPARQL: 10 queries (4 basic, 2 specific, 2 property, 2 counting)
+
+Query Complexity Distribution:
+- Simple: ~20 queries (direct attribute lookups, basic filters)
+- Intermediate: ~18 queries (joins, relationships, range queries)
+- Advanced: ~12 queries (aggregations, graph patterns, complex filters)

@@ -1,0 +1,163 @@
+# Sample Wikidata RDF Dataset
+# Turtle format - simplified for testing
+
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Classes (for type definitions)
+wd:Q5 a rdfs:Class ;
+    rdfs:label "human"@en ;
+    schema:description "any member of Homo sapiens, unique extant species of the genus Homo"@en .
+
+wd:Q169470 a rdfs:Class ;
+    rdfs:label "physicist"@en ;
+    schema:description "scientist who does research in physics"@en .
+
+wd:Q170790 a rdfs:Class ;
+    rdfs:label "mathematician"@en ;
+    schema:description "person with an extensive knowledge of mathematics"@en .
+
+wd:Q6256 a rdfs:Class ;
+    rdfs:label "country"@en ;
+    schema:description "distinct territorial body or political entity"@en .
+
+wd:Q3918 a rdfs:Class ;
+    rdfs:label "university"@en ;
+    schema:description "institution of higher education and research"@en .
+
+# Countries
+wd:Q183 a wd:Q6256 ;
+    rdfs:label "Germany"@en ;
+    schema:description "country in Central Europe"@en .
+
+wd:Q145 a wd:Q6256 ;
+    rdfs:label "United Kingdom"@en ;
+    schema:description "country in north-west Europe"@en .
+
+wd:Q30 a wd:Q6256 ;
+    rdfs:label "United States of America"@en ;
+    schema:description "country primarily located in North America"@en .
+
+wd:Q142 a wd:Q6256 ;
+    rdfs:label "France"@en ;
+    schema:description "country in Western Europe"@en .
+
+# Universities
+wd:Q153006 a wd:Q3918 ;
+    rdfs:label "ETH Zurich"@en ;
+    schema:description "Swiss Federal Institute of Technology in Zurich"@en ;
+    wdt:P31 wd:Q3918 ;  # instance of: university
+    wdt:P17 wd:Q39 .  # country: Switzerland
+
+wd:Q35794 a wd:Q3918 ;
+    rdfs:label "University of Cambridge"@en ;
+    schema:description "public research university in Cambridge, United Kingdom"@en ;
+    wdt:P31 wd:Q3918 ;  # instance of: university
+    wdt:P17 wd:Q145 .  # country: United Kingdom
+
+wd:Q21578 a wd:Q3918 ;
+    rdfs:label "Princeton University"@en ;
+    schema:description "private university in Princeton, New Jersey"@en ;
+    wdt:P31 wd:Q3918 ;  # instance of: university
+    wdt:P17 wd:Q30 .  # country: USA
+
+# Famous Scientists - Physicists
+
+wd:Q937 a wd:Q5 ;
+    rdfs:label "Albert Einstein"@en ;
+    schema:description "German-born theoretical physicist, creator of relativity theory"@en ;
+    wdt:P31 wd:Q5 ;  # instance of: human
+    wdt:P106 wd:Q169470 ;  # occupation: physicist
+    wdt:P27 wd:Q183 ;  # country of citizenship: Germany
+    wdt:P27 wd:Q30 ;  # country of citizenship: USA (later)
+    wdt:P569 "1879-03-14"^^xsd:date ;  # date of birth
+    wdt:P570 "1955-04-18"^^xsd:date ;  # date of death
+    wdt:P108 wd:Q21578 ;  # employer: Princeton University
+    schema:alternateName "A. Einstein"@en .
+
+wd:Q7252 a wd:Q5 ;
+    rdfs:label "Marie Curie"@en ;
+    schema:description "Polish-French physicist and chemist"@en ;
+    wdt:P31 wd:Q5 ;
+    wdt:P106 wd:Q169470 ;
+    wdt:P27 wd:Q142 ;  # France
+    wdt:P569 "1867-11-07"^^xsd:date ;
+    wdt:P570 "1934-07-04"^^xsd:date ;
+    schema:alternateName "Marie Skłodowska-Curie"@en .
+
+wd:Q122894 a wd:Q5 ;
+    rdfs:label "Richard Feynman"@en ;
+    schema:description "American theoretical physicist"@en ;
+    wdt:P31 wd:Q5 ;
+    wdt:P106 wd:Q169470 ;
+    wdt:P27 wd:Q30 ;
+    wdt:P569 "1918-05-11"^^xsd:date ;
+    wdt:P570 "1988-02-15"^^xsd:date ;
+    schema:alternateName "R. P. Feynman"@en .
+
+wd:Q7191 a wd:Q5 ;
+    rdfs:label "Stephen Hawking"@en ;
+    schema:description "British theoretical physicist, cosmologist, and author"@en ;
+    wdt:P31 wd:Q5 ;
+    wdt:P106 wd:Q169470 ;
+    wdt:P27 wd:Q145 ;
+    wdt:P569 "1942-01-08"^^xsd:date ;
+    wdt:P570 "2018-03-14"^^xsd:date ;
+    wdt:P108 wd:Q35794 ;  # University of Cambridge
+    schema:alternateName "S. W. Hawking"@en .
+
+# Famous Scientists - Mathematicians
+
+wd:Q7251 a wd:Q5 ;
+    rdfs:label "Alan Turing"@en ;
+    schema:description "British mathematician, computer scientist, logician, cryptanalyst"@en ;
+    wdt:P31 wd:Q5 ;
+    wdt:P106 wd:Q170790 ;  # occupation: mathematician
+    wdt:P27 wd:Q145 ;
+    wdt:P569 "1912-06-23"^^xsd:date ;
+    wdt:P570 "1954-06-07"^^xsd:date ;
+    wdt:P108 wd:Q35794 ;  # University of Cambridge
+    schema:alternateName "A. M. Turing"@en .
+
+wd:Q7604 a wd:Q5 ;
+    rdfs:label "Kurt Gödel"@en ;
+    schema:description "Austrian-American logician, mathematician, and philosopher"@en ;
+    wdt:P31 wd:Q5 ;
+    wdt:P106 wd:Q170790 ;
+    wdt:P27 wd:Q30 ;
+    wdt:P569 "1906-04-28"^^xsd:date ;
+    wdt:P570 "1978-01-14"^^xsd:date ;
+    wdt:P108 wd:Q21578 ;  # Princeton University
+    schema:alternateName "K. Gödel"@en .
+
+wd:Q8730 a wd:Q5 ;
+    rdfs:label "Ada Lovelace"@en ;
+    schema:description "English mathematician and writer"@en ;
+    wdt:P31 wd:Q5 ;
+    wdt:P106 wd:Q170790 ;
+    wdt:P27 wd:Q145 ;
+    wdt:P569 "1815-12-10"^^xsd:date ;
+    wdt:P570 "1852-11-27"^^xsd:date ;
+    schema:alternateName "Augusta Ada King"@en .
+
+wd:Q7604 a wd:Q5 ;
+    rdfs:label "Emmy Noether"@en ;
+    schema:description "German mathematician"@en ;
+    wdt:P31 wd:Q5 ;
+    wdt:P106 wd:Q170790 ;
+    wdt:P27 wd:Q183 ;
+    wdt:P569 "1882-03-23"^^xsd:date ;
+    wdt:P570 "1935-04-14"^^xsd:date ;
+    schema:alternateName "Amalie Emmy Noether"@en .
+
+# Properties used (for schema documentation)
+# wdt:P31 - instance of
+# wdt:P106 - occupation
+# wdt:P27 - country of citizenship
+# wdt:P569 - date of birth
+# wdt:P570 - date of death
+# wdt:P108 - employer
+# wdt:P17 - country

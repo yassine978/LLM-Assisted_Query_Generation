@@ -32,6 +32,7 @@ venv.bak/
 # IDE
 .vscode/
 .idea/
+.claude
 *.swp
 *.swo
 *~
@@ -71,3 +72,9 @@ evaluation/results/*.json
 *.tmp
 *.bak
 *.cache
+nul
+tmpclaude-*
+
+# Test files
+test_*.py
+*_test_results.md
