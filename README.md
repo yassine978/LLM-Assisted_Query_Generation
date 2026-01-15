@@ -565,29 +565,18 @@ MIT License - see [LICENSE](LICENSE) file for details.
 ## 🙏 Acknowledgments
 
 - **[Groq](https://groq.com)** - Free LLM API access (LLaMA 3.3 70B)
-- **[Anthropic](https://anthropic.com)** - Model Context Protocol specification
 - **Research Community** - Papers and datasets that inspired this work
 - **Open Source Projects** - FastMCP, Neo4j Python Driver, PyMongo, etc.
 
 ---
-
-## 📞 Contact
-
-**Project Repository**: https://github.com/yourusername/LLM-Assisted_Query_Generation
-
-**Issues**: https://github.com/yourusername/LLM-Assisted_Query_Generation/issues
-
 ---
 
 ## 📊 Project Stats
 
 - **Lines of Code**: ~15,000+
 - **Databases Supported**: 5
-- **MCP Servers**: 5
-- **Test Coverage**: 85%+
+- **MCP Servers**: 4
 - **Sample Queries**: 100+
-- **Documentation Pages**: 10+
-
 ---
 
 <div align="center">
