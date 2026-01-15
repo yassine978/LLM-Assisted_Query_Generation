@@ -116,11 +116,9 @@ streamlit run frontend/app.py
 ## 🏛️ Architecture
 <p align="center">
   <img src="./nosql-llm.gif" alt="Project Architecture">
-
-  
 <\p>
 
-```
+
 
 ### Key Components
 
