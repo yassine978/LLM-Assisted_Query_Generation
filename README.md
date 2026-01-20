@@ -5,7 +5,7 @@
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Status: Production Ready](https://img.shields.io/badge/status-production%20ready-brightgreen.svg)]()
+[![Status: Production Ready](https://img.shields.io/badge/status-production%20ready-brightgreen.svg)]()   
 
 ---
 
@@ -37,7 +37,7 @@ This project bridges the gap between non-technical users and NoSQL databases by 
 - **Learning Curve**: Users need to learn multiple query syntaxes to work with different databases
 - **Developer Productivity**: Writing complex queries requires deep knowledge of each database's API
 - **Our Solution**: Ask questions in plain English, get optimized database queries automatically
-
+                                                                                                                           
 ---
 
 ## ✨ Key Features
